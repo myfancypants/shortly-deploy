@@ -3,6 +3,14 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %>\n This is the cooliest shortliest app*/\n',
+        separator: ';',
+      },
+      dist: {
+        src: ['public/client/*.js'],
+        dest:'public/dist/built.js',
+      },
     },
 
     mochaTest: {
@@ -21,6 +29,11 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      my_target: {
+        files: {
+          'public/dist/built.min.js': ['public/dist/built.js']
+        }
+      }
     },
 
     jshint: {
@@ -38,6 +51,15 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'public',
+          src: ['*.css', '!*.min.css'],
+          dest: 'public/dist',
+          ext: '.min.css'
+        }]
+      }
     },
 
     watch: {
@@ -94,6 +116,9 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'concat',
+    'uglify',
+    'cssmin'
   ]);
 
   grunt.registerTask('upload', function(n) {
@@ -105,8 +130,12 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
+    'build',
+    //other things
     // add your deploy tasks here
   ]);
+
+  grunt.registerTask('default', ['deploy']);
 
 
 };
