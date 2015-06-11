@@ -7,7 +7,8 @@ iisnode.yml
 # Icon must ends with two \r.
 Icon
 
-
+# node_modules
+node_modules/
 
 
 # Floobits

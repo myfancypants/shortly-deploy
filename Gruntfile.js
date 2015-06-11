@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 
     jshint: {
       files: [
-        // Add filespec list here
+        'public/client/**/*.js'
       ],
       options: {
         force: 'true',
@@ -69,6 +69,7 @@ module.exports = function(grunt) {
           'public/lib/**/*.js',
         ],
         tasks: [
+          'jshint',
           'concat',
           'uglify'
         ]
@@ -130,6 +131,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
+    'jshint',
     'build',
     //other things
     // add your deploy tasks here
