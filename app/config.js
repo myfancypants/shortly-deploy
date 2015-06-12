@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // TODO: Logic to use production env variable or localhost?
-mongoURI = process.env.MongoDB_URI || 'mongodb://localhost/shortliestdb'
+mongoURI = process.env.CUSTOMCONNSTR_MongoDB_URI || 'mongodb://localhost/shortliestdb'
 mongoose.connect(mongoURI);
 
 var db = mongoose.connection;
