@@ -21,9 +21,9 @@ usersSchema.pre('save', function(next){
 
 var User = mongoose.model('User', usersSchema);
 
-User.comparePassword = function(attemptedPassword, callback) {
-    bcrypt.compare(attemptedPassword, this.password, function(err, isMatch) {
-      callback(isMatch);
+User.comparePassword = function(attemptedPassword, savedPassword, callback) {
+    bcrypt.compare(attemptedPassword, savedPassword, function(err, isMatch) {
+      callback(err, isMatch);
     });
 };
 
